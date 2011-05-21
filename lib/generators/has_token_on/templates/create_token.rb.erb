@@ -1,0 +1,15 @@
+class Create<%=model.capitalize%><%=name.capitalize%> < ActiveRecord::Migration
+  def self.up
+    add_column :<%= model.pluralize %>, :<%= name %>, :string
+    <%- if options.with_index -%>
+    add_index :<%= model.pluralize %>, ["<%= name %>"], :name => "index_<%=model.pluralize%>_on_<%=name%>", :unique => <% if options.unique %>true<% else %>false<% end %>
+    <%- end -%>
+  end
+
+  def self.down
+    <%- if options.with_index -%>
+    remove_index :<%= model.pluralize %>, ["<%= name %>"]
+    <%- end -%>
+    remove_column :<%= model.pluralize %>, :<%= name %>
+  end
+end
