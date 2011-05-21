@@ -17,20 +17,20 @@ Simple yet customizable token generator for Rails 3
 
 * Single token
 
-      has_token_on :slug, :length => 3
+        has_token_on :slug, :length => 3
 
 * Multiple tokens, same configuration
 
-      has_token_on [:slug, :permalink], :length => 3
+         has_token_on [:slug, :permalink], :length => 3
 
 * Multiple tokens with individual configuration
 
-      has_token_on :slug, :length => 3
-      has_token_on :permalink, :length => 5
+          has_token_on :slug, :length => 3
+          has_token_on :permalink, :length => 5
 
 * .. or using single hash
 
-      has_token_on :slug => { :length => 3 }, :permalink => { :length => 5 }
+          has_token_on :slug => { :length => 3 }, :permalink => { :length => 5 }
 
 ## Options
 
@@ -38,44 +38,44 @@ Options are as follows:
 
 * :length - token length. Default - 16.
 
-      has_token_on :slug, length => 3
+          has_token_on :slug, length => 3
 
 * :prepend - prepend something to the beginning of the token. Default - none.
 
-      has_token_on :slug, :prepend => "private"
+          has_token_on :slug, :prepend => "private"
 
 * :append - append something to the back of the token. Default - none.
 
-      has_token_on :slug, :append => "ending"
+          has_token_on :slug, :append => "ending"
 
 * :unique - ensure that tokens is unique (checking is performed in the app logic). Default - false.
 
-      has_token_on :slug, :unique => true
+          has_token_on :slug, :unique => true
 
 * :if - generate token only if provided condition is met. Default - none.
 
-      has_token_on :slug, :if => lambda { |record| record.private? }
+          has_token_on :slug, :if => lambda { |record| record.private? }
 
 * :on - generates token on certain time: :initialize, :create (default), :update.
 
-      has_token_on :slug, :on => :initialize
+          has_token_on :slug, :on => :initialize
 
 * :seed - elements or functions that are used to generate hash. Options:
   * :securerandom - uses ActiveSupport::SecureRandom.hex (default)
 
-        has_token_on :slug, :seed => :securerandom
+            has_token_on :slug, :seed => :securerandom
 
   * :guid - uses simple_uuid gem. You should add it to your Gemfile. 36 characters long GUID. Length param is ignored.
 
-        has_token_on :slug, :seed => :guid
+            has_token_on :slug, :seed => :guid
 
   * ('a'..'z') - a Range. Mixes the range elements up to specified length.
 
-        has_token_on :slug, :seed => ('a'..'z')
+            has_token_on :slug, :seed => ('a'..'z')
 
   * lambda { 2 * 2 } - a Proc. Executes proc. Length param is ignored.
 
-        has_token_on :slug, :seed => lambda { 2 * 2 }
+            has_token_on :slug, :seed => lambda { 2 * 2 }
 
 ## Generator
 
@@ -111,8 +111,8 @@ Tested on Mac OS X with Ruby 1.9.2 p180.
 * Enter gem directory
 * Execute
 
-      bundle
-      rake
+          bundle
+          rake
 
 You may use [guard](https://github.com/guard) for continuous testing
 
