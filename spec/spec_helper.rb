@@ -8,7 +8,9 @@ require 'with_model'
 require 'mocha'
 
 require 'has_token_on'
+require 'has_token_on/models/base'
 require 'has_token_on/models/active_record'
+require 'has_token_on/models/mongoid'
 
 RSpec.configure do |config|
   config.filter_run :focus => true
@@ -16,3 +18,4 @@ RSpec.configure do |config|
   config.extend WithModel
 end
 
+ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")

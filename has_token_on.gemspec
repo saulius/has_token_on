@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
 
   s.add_dependency 'rails', ['>= 3.0.0']
-  s.add_dependency 'simple_uuid'
+  s.add_development_dependency 'simple_uuid'
   s.add_development_dependency 'sqlite3', ['>= 0']
   s.add_development_dependency 'rspec', ['>= 2.0.0']
   s.add_development_dependency 'mocha', ['>= 0.9.8']
@@ -30,4 +30,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'growl', ['>= 0']
   s.add_development_dependency 'rb-fsevent', ['>= 0']
   s.add_development_dependency 'ruby-debug19', ['>= 0']
+  s.add_development_dependency 'mongoid', ['>= 2']
+  s.add_development_dependency 'bson_ext', ['>= 1.3.1']
 end
