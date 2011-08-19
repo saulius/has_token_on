@@ -1,6 +1,6 @@
 # HasTokenOn
 
-Simple yet customizable token generator for Rails 3
+Simple yet customizable token generator for Rails 3.
 
 # Features
 
@@ -106,7 +106,7 @@ has_token_on comes with a generator that generates a migration for token.
 
 # Testing
 
-Tested on Mac OS X with Ruby 1.9.2 p180.
+Tested on Mac OS X with Ruby 1.9.2. Should work on Ruby 1.8.7+.
 
 * Enter gem directory
 * Execute

@@ -109,7 +109,7 @@ module HasTokenOn
         case config[:seed]
           when Symbol
             if config[:seed] == :securerandom
-              ActiveSupport::SecureRandom.hex(config[:length]).first(config[:length])
+              SecureRandom.hex(config[:length]).first(config[:length])
             elsif config[:seed] == :guid
               if simple_uuid_present?
                 ::SimpleUUID::UUID.new.to_guid
