@@ -6,13 +6,10 @@ module HasTokenOn
     extend ActiveSupport::Concern
     include HasTokenOn::Base
 
-    module InstanceMethods
+    private
 
-      private
-
-      def token_is_nonunique?(token)
-        self.class.first(:conditions => { token => self[token] }).present?
-      end
+    def token_is_nonunique?(token)
+      self.class.first(:conditions => { token => self[token] }).present?
     end
   end
 end

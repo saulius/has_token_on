@@ -79,71 +79,67 @@ module HasTokenOn
 
     end
 
-    module InstanceMethods
+    private
 
-      private
+    def create_tokens(record, callback)
+      return unless any_tokens?
 
-      def create_tokens(record, callback)
-        return unless any_tokens?
-
-        tokens_to_build_on(callback).each do |token, config|
-          if !config.has_key?(:if) or (config.has_key?(:if) and config[:if].call(record))
-            begin
-              self[token] = build_token(config)
-            end while (config.has_key?(:unique) and config[:unique]) and token_is_nonunique?(token)
-          end
+      tokens_to_build_on(callback).each do |token, config|
+        if !config.has_key?(:if) or (config.has_key?(:if) and config[:if].call(record))
+          begin
+            self[token] = build_token(config)
+          end while (config.has_key?(:unique) and config[:unique]) and token_is_nonunique?(token)
         end
       end
+    end
 
-      def build_token(config)
-        defaults = { :length => 16, :prepend => "", :append => "", :seed => :securerandom }
-        config = defaults.merge(config)
+    def build_token(config)
+      defaults = { :length => 16, :prepend => "", :append => "", :seed => :securerandom }
+      config = defaults.merge(config)
 
-        return [config[:prepend],
-                build_from_seed(config),
-                config[:append]
-              ].join
-      end
+      return [config[:prepend],
+              build_from_seed(config),
+              config[:append]
+            ].join
+    end
 
-      def build_from_seed(config)
-        case config[:seed]
-          when Symbol
-            if config[:seed] == :securerandom
-              SecureRandom.hex(config[:length]).first(config[:length])
-            elsif config[:seed] == :guid
-              if simple_uuid_present?
-                ::SimpleUUID::UUID.new.to_guid
-              else
-                raise LibraryNotPresent, "Supporting library SimpleUUID is not present. Add it to your Gemfile?"
-              end
+    def build_from_seed(config)
+      case config[:seed]
+        when Symbol
+          if config[:seed] == :securerandom
+            SecureRandom.hex(config[:length]).first(config[:length])
+          elsif config[:seed] == :guid
+            if simple_uuid_present?
+              ::SimpleUUID::UUID.new.to_guid
+            else
+              raise LibraryNotPresent, "Supporting library SimpleUUID is not present. Add it to your Gemfile?"
             end
-          when Range
-            chars = config[:seed].to_a
-            (0...config[:length]).collect { chars[Kernel.rand(chars.length)] }.join
-          when Proc
-            config[:seed].call.to_s
-        end
-      end
-
-      def any_tokens?
-        self.class.tokens && self.class.tokens.any?
-      end
-
-      def tokens_to_build_on(callback)
-        self.class.tokens.select{ |token, config|
-          if config.has_key?(:on)
-            config[:on].include?(callback)
-          else
-            # if user didn't specify :on we set token before record create
-            callback == :create
           end
-        }
+        when Range
+          chars = config[:seed].to_a
+          (0...config[:length]).collect { chars[Kernel.rand(chars.length)] }.join
+        when Proc
+          config[:seed].call.to_s
       end
+    end
 
-      def simple_uuid_present?
-        defined? ::SimpleUUID
-      end
+    def any_tokens?
+      self.class.tokens && self.class.tokens.any?
+    end
 
+    def tokens_to_build_on(callback)
+      self.class.tokens.select{ |token, config|
+        if config.has_key?(:on)
+          config[:on].include?(callback)
+        else
+          # if user didn't specify :on we set token before record create
+          callback == :create
+        end
+      }
+    end
+
+    def simple_uuid_present?
+      defined? ::SimpleUUID
     end
   end
 end
