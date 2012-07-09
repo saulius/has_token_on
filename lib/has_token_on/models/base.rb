@@ -115,7 +115,7 @@ module HasTokenOn
               raise LibraryNotPresent, "Supporting library SimpleUUID is not present. Add it to your Gemfile?"
             end
           end
-        when Range
+        when Range, Array
           chars = config[:seed].to_a
           (0...config[:length]).collect { chars[Kernel.rand(chars.length)] }.join
         when Proc

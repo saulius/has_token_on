@@ -73,6 +73,10 @@ Options are as follows:
 
             has_token_on :slug, :seed => ('a'..'z')
 
+  * ['a', 'b', 'c'] - an Array. Mixes the array elements up to specified length.
+
+            has_token_on :slug, :seed => ['a', 'b', 'c']
+
   * lambda { 2 * 2 } - a Proc. Executes proc. Length param is ignored.
 
             has_token_on :slug, :seed => lambda { 2 * 2 }

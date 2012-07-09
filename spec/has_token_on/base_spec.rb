@@ -114,6 +114,7 @@ describe HasTokenOn::Base do
       t.string "sixteen"
       t.string "proc_seed"
       t.string "range_seed"
+      t.string "array_seed"
       t.string "guid_seed"
       t.boolean :check, :default => true
     end
@@ -148,6 +149,10 @@ describe HasTokenOn::Base do
       },
       :range_seed => {
         :seed => ('a'..'z'),
+        :on => [:initialize]
+      },
+      :array_seed => {
+        :seed => ['a', 'b', 'c'],
         :on => [:initialize]
       },
       :guid_seed => {
@@ -203,6 +208,11 @@ describe HasTokenOn::Base do
     it "should allow :seed to be described as range" do
       subject.range_seed.should =~ /[a-z]/
       subject.range_seed.size.should == 16
+    end
+
+    it "should allow :seed to be described as array" do
+      subject.array_seed.should =~ /\A[abc]*\Z/
+      subject.array_seed.size.should == 16
     end
 
   end
