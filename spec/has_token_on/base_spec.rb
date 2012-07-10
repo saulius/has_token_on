@@ -31,8 +31,7 @@ describe HasTokenOn::Base, "instantiation" do
         has_token_on :tkn
       end
 
-      subject.tokens.size.should == 2
-      subject.tokens.keys == [:permalink, :tkn]
+      subject.tokens.keys.should include(:tkn)
     end
 
     it "should allow to set multiple tokens with hash syntax" do
@@ -40,8 +39,7 @@ describe HasTokenOn::Base, "instantiation" do
         has_token_on :tkn1 => { :length => 3 }, :tkn2 => { :length => 4 }
       end
 
-      subject.tokens.size.should == 4
-      subject.tokens.keys.should == [:permalink, :tkn, :tkn1, :tkn2]
+      subject.tokens.keys.should include(:tkn1, :tkn2)
     end
 
     it "should allow to set multiple tokens with array syntax (same configuration for all)" do
@@ -49,7 +47,6 @@ describe HasTokenOn::Base, "instantiation" do
         has_token_on [:tkn3, :tkn4], { :length => 10 }
       end
 
-      subject.tokens.size.should == 6
       subject.tokens.keys.should include(:tkn3, :tkn4)
     end
 
