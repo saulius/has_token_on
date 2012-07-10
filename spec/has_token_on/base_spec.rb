@@ -106,7 +106,7 @@ describe HasTokenOn::Base do
   with_model :post do
     table do |t|
       t.string "permalink"
-      t.string "test"
+      t.string "test_token"
       t.string "str"
       t.string "sixteen"
       t.string "proc_seed"
@@ -124,7 +124,7 @@ describe HasTokenOn::Base do
         :append => "bar",
         :on => [:initialize]
       },
-      :test => {
+      :test_token => {
         :length => 4,
         :prepend => "foo",
         :seed => :simplerandom,
