@@ -9,7 +9,7 @@ module HasTokenOn
     extend ActiveSupport::Concern
 
     included do
-      after_initialize { |record| create_tokens(record, :initialize) }
+      after_initialize { |record| create_tokens(record, :initialize) if record.new_record? }
       before_create { |record| create_tokens(record, :create) }
       before_update { |record| create_tokens(record, :update) }
     end

@@ -101,6 +101,12 @@ describe HasTokenOn::Base, "callbacks" do
     subject.update_attribute(:permalink_init, "sup yo")
     subject.permalink_none.should_not be_nil
   end
+
+  it "should not regenerate tokens on :initialize if record is persisted" do
+    permalink = subject.permalink_init
+    subject.save
+    subject.reload.permalink_init.should == permalink
+  end
 end
 
 describe HasTokenOn::Base do
