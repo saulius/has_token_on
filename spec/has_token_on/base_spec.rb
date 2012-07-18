@@ -59,6 +59,7 @@ describe HasTokenOn::Base, "callbacks" do
   with_model :post do
     table do |t|
       t.string "permalink_init"
+      t.string "permalink_init_hash"
       t.string "permalink_create"
       t.string "permalink_update"
       t.string "permalink_none"
@@ -66,6 +67,7 @@ describe HasTokenOn::Base, "callbacks" do
 
     model do
       has_token_on :permalink_init, { :length => 3, :on => [:initialize] }
+      has_token_on :permalink_init_hash, { :length => 3, :on => :initialize }
       has_token_on :permalink_create, { :length => 3, :on => [:create] }
       has_token_on :permalink_update, { :length => 3, :on => [:update] }
       has_token_on :permalink_none, { :length => 3 }
@@ -74,6 +76,7 @@ describe HasTokenOn::Base, "callbacks" do
 
   it "should set token on initialize if specified" do
     subject.permalink_init.should_not be_nil
+    subject.permalink_init_hash.should_not be_nil
     subject.permalink_create.should be_nil
     subject.permalink_update.should be_nil
   end

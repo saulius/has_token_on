@@ -130,7 +130,7 @@ module HasTokenOn
     def tokens_to_build_on(callback)
       self.class.tokens.select{ |token, config|
         if config.has_key?(:on)
-          config[:on].include?(callback)
+          [config[:on]].flatten.include?(callback)
         else
           # if user didn't specify :on we set token before record create
           callback == :create
