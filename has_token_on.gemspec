@@ -18,17 +18,17 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README.md']
   s.require_paths = ['lib']
 
-  s.add_dependency 'railties', ['>= 3.0.0']
+  s.add_dependency 'railties', ['~> 3.0']
   s.add_development_dependency 'simple_uuid'
   s.add_development_dependency 'sqlite3', ['>= 0']
-  s.add_development_dependency 'rspec', ['>= 2.0.0']
-  s.add_development_dependency 'mocha', ['>= 0.9.8']
+  s.add_development_dependency 'rspec', ['~> 2.0']
+  s.add_development_dependency 'mocha', ['~> 0.9.8']
   s.add_development_dependency 'with_model', ['>= 0.1.4']
   s.add_development_dependency 'guard', ['>= 0.3.4']
   s.add_development_dependency 'guard-rspec', ['>= 0']
   s.add_development_dependency 'growl', ['>= 0']
   s.add_development_dependency 'rb-fsevent', ['>= 0']
   s.add_development_dependency 'ruby-debug19', ['>= 0']
-  s.add_development_dependency 'mongoid', ['>= 2']
+  s.add_development_dependency 'mongoid', ['~> 2.0']
   s.add_development_dependency 'bson_ext', ['>= 1.3.1']
 end
